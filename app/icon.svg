@@ -1,10 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <!-- Background -->
-  <rect width="32" height="32" rx="7" fill="#09090b"/>
-  <!-- Letter A (path-based, no font dependency) -->
-  <g stroke="#E1E0CC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <line x1="16" y1="6"  x2="5"    y2="26"/>
-    <line x1="16" y1="6"  x2="27"   y2="26"/>
-    <line x1="9.4" y1="18" x2="22.6" y2="18"/>
-  </g>
+  <rect width="32" height="32" rx="6" fill="#09090b"/>
+
+  <!-- Left temple -->
+  <line x1="3" y1="14" x2="1" y2="12" stroke="#E1E0CC" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right temple -->
+  <line x1="29" y1="14" x2="31" y2="12" stroke="#E1E0CC" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Left lens — square corners = 8-bit -->
+  <rect x="3" y="12" width="11" height="9" fill="none" stroke="#E1E0CC" stroke-width="2.5" stroke-linejoin="miter"/>
+  <!-- Right lens -->
+  <rect x="18" y="12" width="11" height="9" fill="none" stroke="#E1E0CC" stroke-width="2.5" stroke-linejoin="miter"/>
+
+  <!-- Bridge -->
+  <line x1="14" y1="16.5" x2="18" y2="16.5" stroke="#E1E0CC" stroke-width="2.5" stroke-linecap="square"/>
 </svg>
