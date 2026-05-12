@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     description:
       "Fintech, sistemas críticos e automação com IA. Interfaces que operam em produção real.",
     images: ["/og-image.png"],
-    creator: "@andreyrattes",
+    creator: "@mechamoandrey",
   },
 };
 
@@ -105,8 +105,8 @@ export default function RootLayout({
       "Sistemas distribuídos",
     ],
     sameAs: [
-      "https://github.com/andreyrattes",
-      "https://linkedin.com/in/andreyrattes",
+      "https://github.com/mechamoandrey",
+      "https://www.linkedin.com/in/andrey-azevedo/",
     ],
   };
 

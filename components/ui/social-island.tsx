@@ -15,11 +15,10 @@ const islandTransition: Transition = {
   duration: 0.5,
 };
 
-/* ── Update with your actual links ──────────────────────────────────────── */
 export const SOCIAL_LINKS = [
-  { id: "github",   name: "GitHub",   Icon: SiGithub,      href: "https://github.com/yourusername" },
-  { id: "linkedin", name: "LinkedIn", Icon: FaLinkedinIn, href: "https://linkedin.com/in/yourusername" },
-  { id: "email",    name: "Email",    Icon: Mail,          href: "mailto:contato@email.com" },
+  { id: "github",   name: "GitHub",   Icon: SiGithub,      href: "https://github.com/mechamoandrey" },
+  { id: "linkedin", name: "LinkedIn", Icon: FaLinkedinIn,  href: "https://www.linkedin.com/in/andrey-azevedo/" },
+  { id: "email",    name: "Email",    Icon: Mail,          href: "mailto:mechamoandrey@gmail.com" },
 ] as const;
 
 export function SocialIsland({ className }: { className?: string }) {
