@@ -232,9 +232,28 @@ function PerformanceCard({ cap }: { cap: typeof CAPABILITIES[1] }) {
 /* ════════════════════════════════════════════════════════════════════════════════
    CARD 03 — Motion · TiltCard + WebGL tubes
    ════════════════════════════════════════════════════════════════════════════════ */
+/* Tubes color palette — cool blues in dark mode, warm earth in light mode.
+   Both palettes keep the 3D animation; only the hues change so they
+   harmonize with the active theme instead of producing a muddy mid-tone. */
+const TUBE_PALETTE = {
+  dark: {
+    tubes:  ["#7a9bb5", "#4a7fa8", "#2d5f8a"],
+    lights: ["#a0c8e8", "#4fc3f7", "#7a9bb5", "#2d9cdb"],
+    opacity: 0.8,
+  },
+  light: {
+    tubes:  ["#B86E3F", "#9C5D2E", "#7A4F2D"],   /* terracota / rust / coffee */
+    lights: ["#D4882A", "#E5B47A", "#B86E3F", "#9C5D2E"], /* amber / sand / terracota */
+    opacity: 0.55, /* softer so text reads on top */
+  },
+};
+
 function MotionFeaturedCard({ cap }: { cap: typeof CAPABILITIES[2] }) {
   const [active, setActive] = useState(false);
   const accentText = useAccent(cap);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme !== "light";
+  const palette = isDark ? TUBE_PALETTE.dark : TUBE_PALETTE.light;
 
   return (
     <motion.div
@@ -250,15 +269,29 @@ function MotionFeaturedCard({ cap }: { cap: typeof CAPABILITIES[2] }) {
         effect="gravitate" spotlight={true}
         className="h-full rounded-3xl"
         style={{
-          background: "color-mix(in oklch, var(--foreground) 4%, transparent)",
+          /* Solid surface in light mode so tubes render against a clean cream
+             backdrop instead of bleeding into the page bg. */
+          background: isDark
+            ? "color-mix(in oklch, var(--foreground) 4%, transparent)"
+            : "var(--card)",
           border: `1px solid ${cap.accent}30`,
         }}
       >
-        {active && <CardTubesBg />}
+        {active && (
+          <CardTubesBg
+            colors={palette.tubes}
+            lightColors={palette.lights}
+            opacity={palette.opacity}
+          />
+        )}
 
-        {/* readability gradient */}
+        {/* readability gradient — stronger in light mode to keep content area calm */}
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 90% 70% at 50% 110%, transparent 0%, color-mix(in oklch, var(--background) 55%, transparent) 80%)" }} />
+          style={{
+            background: isDark
+              ? "radial-gradient(ellipse 90% 70% at 50% 110%, transparent 0%, color-mix(in oklch, var(--background) 55%, transparent) 80%)"
+              : "radial-gradient(ellipse 110% 80% at 50% 100%, transparent 0%, color-mix(in oklch, var(--card) 85%, transparent) 55%)"
+          }} />
 
         <div className="relative z-10 h-full flex flex-col gap-5 p-8 md:p-9">
           <span className="text-[11px] font-mono font-bold tracking-widest" style={{ color: `${accentText}b3` }}>{cap.number}</span>
@@ -269,7 +302,15 @@ function MotionFeaturedCard({ cap }: { cap: typeof CAPABILITIES[2] }) {
 
           <p className="text-[11px] font-semibold uppercase tracking-widest" style={{ color: accentText }}>{cap.subtitle}</p>
           <p className="text-sm leading-relaxed text-muted-foreground flex-1">{cap.body}</p>
-          <TagList tags={cap.tags} accent={cap.accent} accentText={accentText} />
+          {/* Wrap badges in a backdrop-blur + cream wash container so they stay
+              readable while the tubes animate behind. Light mode only — dark
+              mode already has enough contrast against the dark card. */}
+          <div
+            className={isDark ? "" : "rounded-2xl p-2 -m-2 backdrop-blur-sm"}
+            style={isDark ? undefined : { background: "color-mix(in oklch, var(--card) 70%, transparent)" }}
+          >
+            <TagList tags={cap.tags} accent={cap.accent} accentText={accentText} />
+          </div>
         </div>
       </TiltCard>
     </motion.div>

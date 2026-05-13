@@ -88,15 +88,21 @@ export function CardTubesBg({
   colors = ["#7a9bb5", "#4a7fa8", "#2d5f8a"],
   lightColors = ["#a0c8e8", "#4fc3f7", "#7a9bb5", "#2d9cdb"],
   lightIntensity = 160,
+  opacity = 0.8,
 }: {
   colors?: string[];
   lightColors?: string[];
   lightIntensity?: number;
+  opacity?: number;
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // Re-init when palette changes (theme toggle)
+  const colorsKey = colors.join("|") + "::" + lightColors.join("|");
 
   useEffect(() => {
     let destroyed = false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let app: any = null;
 
     (async () => {
       const mod = await import(
@@ -106,21 +112,23 @@ export function CardTubesBg({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const Ctor = (mod as any).default ?? mod;
       if (!canvasRef.current || destroyed) return;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const app: any = Ctor(canvasRef.current, {
+      app = Ctor(canvasRef.current, {
         tubes: { colors, lights: { intensity: lightIntensity, colors: lightColors } },
       });
-      return () => { try { app?.dispose?.(); } catch { /* ignore */ } };
     })();
 
-    return () => { destroyed = true; };
+    return () => {
+      destroyed = true;
+      try { app?.dispose?.(); } catch { /* ignore */ }
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [colorsKey, lightIntensity]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none opacity-80"
+      style={{ opacity }}
+      className="absolute inset-0 w-full h-full pointer-events-none"
     />
   );
 }
