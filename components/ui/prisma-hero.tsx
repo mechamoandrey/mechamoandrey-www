@@ -3,6 +3,10 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { useTheme } from "next-themes";
+import { SOCIAL_LINKS } from "@/components/ui/social-island";
+
+const LINKEDIN_HREF =
+  SOCIAL_LINKS.find((s) => s.id === "linkedin")?.href ?? "https://www.linkedin.com/in/andrey-azevedo/";
 
 /* ─── WordsPullUp ─────────────────────────────────── */
 interface WordsPullUpProps {
@@ -66,7 +70,7 @@ function ShinyText({
       initial={{ y: "110%", opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block"
+      className="inline-block pb-[0.18em] leading-[0.98]"
       style={{
         backgroundImage: `linear-gradient(${spread}deg, ${color} 0%, ${color} 35%, ${shineColor} 50%, ${color} 65%, ${color} 100%)`,
         backgroundSize: "200% auto",
@@ -75,6 +79,7 @@ function ShinyText({
         WebkitTextFillColor: "transparent",
         // Pure-CSS sweep: reliable on SSR / Vercel builds — no JS frame timing
         animation: `shine-sweep ${speed}s linear ${delay + 0.7}s infinite`,
+        // Mínimo de pb para descendentes com background-clip:text; leading alinhado ao h1 (0.9).
       }}
     >
       {text}
@@ -187,7 +192,8 @@ const PortfolioHero = () => {
 
         {/* ── 2. Text layer (NOT clipped) ───────────── */}
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-14 sm:px-6 sm:pb-16 md:px-10 md:pb-20">
-          <div className="grid grid-cols-12 items-end gap-3 sm:gap-4">
+          {/* translate-y: compensa o “subir” visual do h1 quando ganhou pb na linha do ShinyText (items-end ancora a base do bloco). */}
+          <div className="grid translate-y-5 grid-cols-12 items-end gap-3 sm:translate-y-7 sm:gap-4 md:translate-y-10 lg:translate-y-11">
 
             {/* Large headline */}
             <div className="col-span-12 lg:col-span-7 xl:col-span-8">
@@ -222,8 +228,8 @@ const PortfolioHero = () => {
                     style={{ color: textColor }}
                   />
                 </motion.span>
-                {/* Line 3: free, no clip — p / ç descenders render naturally */}
-                <span className="block">
+                {/* Line 3: -mt leve mantém perto do “que aguentam”; pb/leading no ShinyText evita clip em p/ç */}
+                <span className="-mt-[0.03em] block overflow-visible">
                   <ShinyText text="produção" delay={0.72} color={textColor} />
                   <motion.span
                     initial={{ y: "110%", opacity: 0 }}
@@ -258,7 +264,9 @@ const PortfolioHero = () => {
               >
                 {/* SplitButton: left icon slides in, right icon slides out */}
                 <a
-                  href="#contato"
+                  href={LINKEDIN_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center self-start rounded-full h-11 text-sm font-semibold
                     pl-5 pr-12
                     hover:pl-12 hover:pr-5

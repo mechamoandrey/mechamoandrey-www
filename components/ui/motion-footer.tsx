@@ -110,6 +110,9 @@ const STYLES = `
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0px 0px 20px color-mix(in oklch, var(--foreground) 12%, transparent));
+  /* Same as hero ShinyText: background-clip:text clips descenders (g, p, ç) — room below + line-height */
+  padding-bottom: 0.18em;
+  line-height: 1.02;
 }
 `;
 
@@ -275,7 +278,7 @@ export function CinematicFooter() {
 
             <h2
               ref={headingRef}
-              className="text-4xl sm:text-6xl md:text-7xl font-black footer-text-glow tracking-tight mb-12 text-center leading-[0.9]"
+              className="text-4xl sm:text-6xl md:text-7xl font-black footer-text-glow tracking-tight mb-12 text-center"
             >
               Vamos construir algo<br />
               <span className="text-muted-foreground font-black">que valha a pena.</span>

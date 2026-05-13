@@ -31,7 +31,7 @@ const TECH_ICONS: Record<string, React.ComponentType<{ className?: string }>> = 
 const CAPABILITIES = [
   {
     number: "01",
-    title:    "Engenharia Frontend",
+    title:    "Software Architecture",
     subtitle: "Arquitetura que escala junto com o time",
     body:     "Frontend escalável começa antes da primeira linha de componente. Modelagem de estado, fronteiras claras entre domínios, testes que protegem comportamento de negócio. Conduzi migração ao vivo em plataforma financeira com feature flag em produção e deploy sem downtime. O usuário não soube que aconteceu.",
     tags:     ["React 19", "Next.js 15", "Angular 18", "TypeScript strict", "Clean Architecture"],
@@ -51,7 +51,7 @@ const CAPABILITIES = [
     subtitle: "Movimento que conta o que a interface está fazendo",
     body:     "Animação boa some. Aparece quando precisa orientar a próxima ação, marcar o que mudou ou dar tempo para o sistema confirmar uma operação. Tudo a 60fps, só transform e opacity, nunca layout. Em checkout e onboarding isso reduz a fricção que aparece no funil.",
     tags:     ["Framer Motion", "GSAP", "ScrollTrigger", "Spring Physics", "prefers-reduced-motion"],
-    accent:   "#7a9bb5",
+    accent:   "#7A8B5C",
   },
   {
     number: "04",

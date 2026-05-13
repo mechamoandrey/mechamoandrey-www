@@ -17,7 +17,7 @@ export function ScrollProgress() {
       style={{
         scaleX,
         background:
-          "linear-gradient(90deg, #6366f1 0%, #a78bfa 30%, #10b981 60%, #f59e0b 85%, #6366f1 100%)",
+          "linear-gradient(90deg, #B86E3F 0%, #D4882A 30%, #8A6E3D 60%, #7A4F2D 85%, #B86E3F 100%)",
         opacity: useSpring(scrollYProgress, { stiffness: 100, damping: 20 }),
       }}
     />

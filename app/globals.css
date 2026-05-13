@@ -49,38 +49,39 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  /* Warm earth palette — anchored on hero's #a0724a */
+  --background:          #F5EFE4;             /* cream paper */
+  --foreground:          #2A1E14;             /* coffee brown, primary text */
+  --card:                #FAF6EB;             /* lifted surface */
+  --card-foreground:     #2A1E14;
+  --popover:             #FAF6EB;
+  --popover-foreground:  #2A1E14;
+  --primary:             #3D2A1A;             /* rich brown */
+  --primary-foreground:  #F5EFE4;
+  --secondary:           #EBE3D2;             /* warm linen */
+  --secondary-foreground:#3D2A1A;
+  --muted:               #EBE3D2;
+  --muted-foreground:    #6B5440;             /* warm medium brown — 5.8:1 on cream */
+  --accent:              #a0724a;             /* hero anchor */
+  --accent-foreground:   #FAF6EB;
+  --destructive:         #A8462B;             /* warm rust */
+  --border:              #D4C9B0;             /* warm border */
+  --input:               #D4C9B0;
+  --ring:                #a0724a;
+  --chart-1:             #B86E3F;             /* terracota */
+  --chart-2:             #C89530;             /* mustard */
+  --chart-3:             #7A8B5C;             /* sage */
+  --chart-4:             #9C5D2E;             /* rust */
+  --chart-5:             #D4882A;             /* amber */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar:                    #FAF6EB;
+  --sidebar-foreground:         #2A1E14;
+  --sidebar-primary:            #3D2A1A;
+  --sidebar-primary-foreground: #F5EFE4;
+  --sidebar-accent:             #EBE3D2;
+  --sidebar-accent-foreground:  #3D2A1A;
+  --sidebar-border:             #D4C9B0;
+  --sidebar-ring:               #a0724a;
 }
 
 .dark {

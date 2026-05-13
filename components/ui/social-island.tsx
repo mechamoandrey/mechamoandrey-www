@@ -83,7 +83,23 @@ export function SocialIsland({ className }: { className?: string }) {
 
               <div className="flex items-center gap-2.5 flex-1">
                 {SOCIAL_LINKS.map(({ id, Icon }) => (
-                  <Icon key={id} className="w-3.5 h-3.5 text-foreground/35" />
+                  <span
+                    key={id}
+                    className={cn(
+                      "group/icon-preview relative inline-flex items-center justify-center rounded-lg p-1",
+                      "transition-[transform,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                      "motion-reduce:transition-none",
+                      "md:hover:-translate-y-0.5 md:hover:scale-[1.12]",
+                      "md:active:translate-y-0 md:active:scale-[0.96]",
+                    )}
+                  >
+                    <Icon
+                      className={cn(
+                        "h-3.5 w-3.5 text-foreground/35 transition-colors duration-200",
+                        "md:group-hover/icon-preview:text-foreground/75",
+                      )}
+                    />
+                  </span>
                 ))}
               </div>
 

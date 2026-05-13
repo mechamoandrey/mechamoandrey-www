@@ -63,12 +63,12 @@ export function MetricsSection() {
           className="mt-8 flex flex-wrap justify-center gap-3"
         >
           {[
-            { label: "LCP < 2.5s", color: "#22c55e" },
-            { label: "CLS < 0.1", color: "#22c55e" },
-            { label: "Lighthouse 95+", color: "#6366f1" },
-            { label: "Bundle otimizado", color: "#f59e0b" },
-            { label: "Testes unitários", color: "#3b82f6" },
-            { label: "a11y compliant", color: "#ec4899" },
+            { label: "LCP < 2.5s", color: "#7A8B5C" },     /* sage */
+            { label: "CLS < 0.1", color: "#7A8B5C" },      /* sage */
+            { label: "Lighthouse 95+", color: "#8A6E3D" }, /* bronze */
+            { label: "Bundle otimizado", color: "#D4882A" }, /* amber */
+            { label: "Testes unitários", color: "#7A4F2D" }, /* coffee */
+            { label: "a11y compliant", color: "#B86E3F" }, /* terracota */
           ].map((badge) => (
             <span
               key={badge.label}
