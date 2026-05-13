@@ -50,18 +50,18 @@
 
 :root {
   /* Warm earth palette — anchored on hero's #a0724a */
-  --background:          #F5EFE4;             /* cream paper */
+  --background:          #EBDFC7;             /* deep cream, bridges hero #a0724a */
   --foreground:          #2A1E14;             /* coffee brown, primary text */
-  --card:                #FAF6EB;             /* lifted surface */
+  --card:                #F2E8D2;             /* lifted surface */
   --card-foreground:     #2A1E14;
-  --popover:             #FAF6EB;
+  --popover:             #F2E8D2;
   --popover-foreground:  #2A1E14;
   --primary:             #3D2A1A;             /* rich brown */
-  --primary-foreground:  #F5EFE4;
-  --secondary:           #EBE3D2;             /* warm linen */
+  --primary-foreground:  #EBDFC7;
+  --secondary:           #DDD0B5;             /* warm linen */
   --secondary-foreground:#3D2A1A;
-  --muted:               #EBE3D2;
-  --muted-foreground:    #6B5440;             /* warm medium brown — 5.8:1 on cream */
+  --muted:               #DDD0B5;
+  --muted-foreground:    #5C4838;             /* deeper warm brown — 5.7:1 on cream */
   --accent:              #a0724a;             /* hero anchor */
   --accent-foreground:   #FAF6EB;
   --destructive:         #A8462B;             /* warm rust */
