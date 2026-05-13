@@ -14,12 +14,12 @@ const CONSTANTS = {
 const STYLES: Record<string, Record<string, string>> = {
   trigger: {
     container:
-      'rounded-full flex items-center bg-foreground justify-center cursor-pointer outline-none ring-0 hover:brightness-125 transition-all duration-100 z-50',
+      'rounded-full flex items-center bg-foreground justify-center cursor-pointer outline-none ring-1 ring-black/10 dark:ring-white/10 shadow-[0_10px_30px_-6px_rgba(0,0,0,0.35),0_4px_12px_-2px_rgba(0,0,0,0.22)] hover:brightness-125 hover:shadow-[0_14px_36px_-6px_rgba(0,0,0,0.45),0_6px_16px_-2px_rgba(0,0,0,0.28)] transition-all duration-150 z-50',
     active: 'bg-foreground'
   },
   item: {
     container:
-      'rounded-full flex items-center justify-center absolute bg-muted hover:bg-muted/50 cursor-pointer',
+      'rounded-full flex items-center justify-center absolute bg-muted hover:bg-muted/50 cursor-pointer ring-1 ring-black/10 dark:ring-white/10 shadow-[0_8px_20px_-4px_rgba(0,0,0,0.28),0_3px_8px_-2px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-shadow duration-200',
     label: 'text-xs text-foreground absolute top-full left-1/2 -translate-x-1/2 mt-1 whitespace-nowrap'
   }
 };
