@@ -42,6 +42,8 @@ interface MenuItemProps {
   label: string;
   href?: string;
   onClick?: () => void;
+  /** When true, `icon` is interactive (e.g. ThemeToggler). Uses a div wrapper instead of a button. */
+  embedInteractive?: boolean;
   index: number;
   totalItems: number;
   isOpen: boolean;
@@ -50,36 +52,51 @@ interface MenuItemProps {
 }
 
 const MenuItem = ({
-  icon, label, href, onClick, index, totalItems, isOpen,
+  icon, label, href, onClick, embedInteractive, index, totalItems, isOpen,
   startAngle = -Math.PI / 2,
   arc = 2 * Math.PI,
 }: MenuItemProps) => {
   const { x, y } = pointOnCircle(index, totalItems, CONSTANTS.containerSize / 2, startAngle, arc);
   const [hovering, setHovering] = useState(false);
 
-  const inner = (
+  const motionCommon = {
+    animate: { x: isOpen ? x : 0, y: isOpen ? y : 0 },
+    transition: {
+      delay: isOpen ? index * CONSTANTS.openStagger : index * CONSTANTS.closeStagger,
+      type: 'spring' as const,
+      stiffness: 300,
+      damping: 30
+    },
+    style: { height: CONSTANTS.itemSize - 2, width: CONSTANTS.itemSize - 2 },
+    className: cn(STYLES.item.container, embedInteractive && 'flex items-center justify-center'),
+    onMouseEnter: () => setHovering(true),
+    onMouseLeave: () => setHovering(false),
+  };
+
+  const labelNode = hovering && <p className={STYLES.item.label}>{label}</p>;
+
+  const inner = embedInteractive ? (
+    <motion.div {...motionCommon}>
+      {icon}
+      {labelNode}
+    </motion.div>
+  ) : (
     <motion.button
-      animate={{ x: isOpen ? x : 0, y: isOpen ? y : 0 }}
+      {...motionCommon}
       whileHover={{ scale: 1.1, transition: { duration: 0.1, delay: 0 } }}
-      transition={{
-        delay: isOpen ? index * CONSTANTS.openStagger : index * CONSTANTS.closeStagger,
-        type: 'spring',
-        stiffness: 300,
-        damping: 30
-      }}
-      style={{ height: CONSTANTS.itemSize - 2, width: CONSTANTS.itemSize - 2 }}
-      className={STYLES.item.container}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
       onClick={onClick}
     >
       {icon}
-      {hovering && <p className={STYLES.item.label}>{label}</p>}
+      {labelNode}
     </motion.button>
   );
 
   if (href) {
-    return <a href={href} className={STYLES.item.container}>{inner}</a>;
+    return (
+      <a href={href} className={STYLES.item.container} onClick={(e) => e.stopPropagation()}>
+        {inner}
+      </a>
+    );
   }
   return <div className={STYLES.item.container}>{inner}</div>;
 };
@@ -182,7 +199,14 @@ const CircleMenu = ({
   startAngle = -Math.PI / 2,
   arc = 2 * Math.PI,
 }: {
-  items: Array<{ label: string; icon: React.ReactNode; href?: string; onClick?: () => void }>;
+  items: Array<{
+    label: string;
+    icon: React.ReactNode;
+    href?: string;
+    onClick?: () => void;
+    /** Icon hosts its own controls (e.g. ThemeToggler); avoids nested buttons */
+    embedInteractive?: boolean;
+  }>;
   openIcon?: React.ReactNode;
   closeIcon?: React.ReactNode;
   startAngle?: number;
@@ -224,6 +248,7 @@ const CircleMenu = ({
             label={item.label}
             href={item.href}
             onClick={item.onClick}
+            embedInteractive={item.embedInteractive}
             index={index}
             totalItems={items.length}
             isOpen={isOpen}

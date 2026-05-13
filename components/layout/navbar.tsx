@@ -2,11 +2,11 @@
 import { CircleMenu } from "@/components/ui/circle-menu";
 import { SocialIsland } from "@/components/ui/social-island";
 import { SOCIAL_LINKS } from "@/components/ui/social-island";
+import { ThemeToggler } from "@/components/ui/theme-toggler";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
-import { Mail, SunMoon } from "lucide-react";
+import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 import { INTRO_DONE_MS } from "@/components/ui/intro-loader";
 
 // Items expand in a 90° arc from UP → LEFT (upper-left quadrant)
@@ -14,9 +14,6 @@ const FAB_START_ANGLE = -Math.PI / 2;
 const FAB_ARC = -Math.PI / 2;
 
 export function Navbar() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const toggleTheme = () => setTheme(resolvedTheme === "dark" ? "light" : "dark");
-
   const mobileItems = [
     {
       label: "GitHub",
@@ -35,8 +32,12 @@ export function Navbar() {
     },
     {
       label: "Tema",
-      icon: <SunMoon size={16} />,
-      onClick: toggleTheme,
+      icon: (
+        <span className="flex scale-[0.88] items-center justify-center">
+          <ThemeToggler />
+        </span>
+      ),
+      embedInteractive: true,
     },
   ];
 
