@@ -1,7 +1,7 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, type HTMLAttributes } from "react";
 import { useTheme } from "next-themes";
 import { SOCIAL_LINKS } from "@/components/ui/social-island";
 
@@ -88,10 +88,15 @@ function ShinyText({
 }
 
 /* ─── Constants ───────────────────────────────────── */
-const VIDEO_SRC =
+const VIDEO_POSTER = "/hero-poster.webp";
+
+const VIDEO_SRC_DEFAULT =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 
+const VIDEO_SRC =
+  process.env.NEXT_PUBLIC_HERO_VIDEO_SRC?.trim() || VIDEO_SRC_DEFAULT;
 
+const HERO_VIDEO_WEBM = process.env.NEXT_PUBLIC_HERO_VIDEO_WEBM_SRC?.trim();
 const TECH_STACK = [
   "React",
   "Next.js",
@@ -134,21 +139,52 @@ const PortfolioHero = () => {
         {/* ── 1. Visual layer (clipped) ──────────────── */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl md:rounded-[2rem]">
 
-          {/* Video background */}
-          <motion.video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-            src={VIDEO_SRC}
-            animate={{
-              filter: isDark
-                ? "brightness(1) saturate(1) hue-rotate(0deg)"
-                : "brightness(1.55) saturate(0.6) hue-rotate(15deg)",
-            }}
-            transition={{ duration: 1.4, ease: "easeInOut" }}
-          />
+          {/* Video background: vídeo nativo (fetchPriority) + motion no wrapper para filtro por tema */}
+          {HERO_VIDEO_WEBM ? (
+            <motion.div
+              className="absolute inset-0 h-full w-full"
+              animate={{
+                filter: isDark
+                  ? "brightness(1) saturate(1) hue-rotate(0deg)"
+                  : "brightness(1.55) saturate(0.6) hue-rotate(15deg)",
+              }}
+              transition={{ duration: 1.4, ease: "easeInOut" }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={VIDEO_POSTER}
+                className="h-full w-full object-cover"
+                {...{ fetchPriority: "high" } as HTMLAttributes<HTMLVideoElement>}
+              >
+                <source src={HERO_VIDEO_WEBM} type="video/webm" />
+                <source src={VIDEO_SRC} type="video/mp4" />
+              </video>
+            </motion.div>
+          ) : (
+            <motion.div
+              className="absolute inset-0 h-full w-full"
+              animate={{
+                filter: isDark
+                  ? "brightness(1) saturate(1) hue-rotate(0deg)"
+                  : "brightness(1.55) saturate(0.6) hue-rotate(15deg)",
+              }}
+              transition={{ duration: 1.4, ease: "easeInOut" }}
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={VIDEO_POSTER}
+                className="h-full w-full object-cover"
+                src={VIDEO_SRC}
+                {...{ fetchPriority: "high" } as HTMLAttributes<HTMLVideoElement>}
+              />
+            </motion.div>
+          )}
 
           {/* Dark-mode gradient */}
           <motion.div

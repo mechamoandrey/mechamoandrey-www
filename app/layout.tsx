@@ -112,6 +112,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${jakartaSans.variable} h-full antialiased`}
     >
       <head>
+        <link
+          rel="preconnect"
+          href="https://d8j0ntlcm91z4.cloudfront.net"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
