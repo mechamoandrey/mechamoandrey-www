@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -21,61 +21,56 @@ const jakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const BASE_URL = "https://andreyrattes.dev";
+const BASE_URL = "https://www.andrey.dev.br";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)",  color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#a0724a" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Andrey Rattes · Engenheiro Frontend Sênior",
+    default: "Andrey Rattes — Engenheiro Frontend",
     template: "%s · Andrey Rattes",
   },
   description:
-    "Engenheiro frontend sênior com foco em fintech, sistemas de alta disponibilidade e automação com IA. Angular, React, Next.js, GSAP, performance e observabilidade em produção.",
-  keywords: [
-    "engenheiro frontend",
-    "desenvolvedor frontend sênior",
-    "React",
-    "Next.js",
-    "Angular",
-    "TypeScript",
-    "fintech",
-    "performance web",
-    "Core Web Vitals",
-    "automação IA",
-  ],
+    "Engenheiro frontend com foco em fintech, sistemas críticos e automação com IA. Construo interfaces que aguentam produção: performance, observabilidade e arquitetura que escala.",
   authors: [{ name: "Andrey Rattes", url: BASE_URL }],
   creator: "Andrey Rattes",
+  publisher: "Andrey Rattes",
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   alternates: {
-    canonical: BASE_URL,
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: BASE_URL,
     siteName: "Andrey Rattes",
-    title: "Andrey Rattes · Engenheiro Frontend Sênior",
+    title: "Andrey Rattes — Engenheiro Frontend",
     description:
-      "Fintech, sistemas críticos e automação com IA. Interfaces que operam em produção real — observabilidade, zero-downtime, magnitude.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Andrey Rattes — Engenheiro Frontend Sênior",
-      },
-    ],
+      "Fintech, sistemas críticos e automação com IA. Interfaces que operam em produção real.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Andrey Rattes · Engenheiro Frontend Sênior",
+    title: "Andrey Rattes — Engenheiro Frontend",
     description:
       "Fintech, sistemas críticos e automação com IA. Interfaces que operam em produção real.",
-    images: ["/og-image.png"],
     creator: "@mechamoandrey",
   },
 };
@@ -90,9 +85,9 @@ export default function RootLayout({
     "@type": "Person",
     name: "Andrey Rattes",
     url: BASE_URL,
-    jobTitle: "Engenheiro Frontend Sênior",
+    jobTitle: "Engenheiro Frontend",
     description:
-      "Engenheiro frontend com foco em fintech, sistemas de alta disponibilidade e automação com IA.",
+      "Engenheiro frontend com foco em fintech, sistemas críticos e automação com IA.",
     knowsAbout: [
       "React",
       "Next.js",
